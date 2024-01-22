@@ -19,7 +19,7 @@ app.get('/api/data', (req, res) => {
   // Response with @odata.nextLink field
   const response = {
     data: paginatedData,
-    '@odata.nextLink': `http://localhost:${port}`+nextPage,
+    'nextPage': `http://localhost:${port}`+nextPage,
   };
 
   res.json(response);
