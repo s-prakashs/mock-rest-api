@@ -15,12 +15,35 @@ app.get('/api/data', (req, res) => {
 
   // Calculate next page URL
   const nextPage = page * pageSize < data.length ? `/api/data?page=${page + 1}` : null;
+  // Response with @odata.nextLink field
+  const response = {
+    data: paginatedData
+    // 'nextPage': `http://localhost:${port}` + nextPage,
+  };
+  if(nextPage){
+    response.nextPage = `http://localhost:${port}` + nextPage;
+  }
+  res.json(response);
+});
+
+app.get('/api/data2', (req, res) => {
+  const pageSize = 5;
+  const page = parseInt(req.query.page) || 1;
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedData = data.slice(startIndex, endIndex);
+
+  // Calculate next page URL
+  const nextPage = page * pageSize < data.length ? `/api/data2?page=${page + 1}` : null;
 
   // Response with @odata.nextLink field
   const response = {
-    data: paginatedData,
-    'nextPage': `http://localhost:${port}`+nextPage,
+    data: paginatedData
+    // 'nextPage': `http://localhost:${port}` + nextPage,
   };
+  if(nextPage){
+    response.nextPage = `http://localhost:${port}` + nextPage;
+  }
 
   res.json(response);
 });
