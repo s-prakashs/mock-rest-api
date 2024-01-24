@@ -21,7 +21,7 @@ app.get('/api/data', (req, res) => {
     // 'nextPage': `http://localhost:${port}` + nextPage,
   };
   if(nextPage){
-    response.nextPage = `http://localhost:${port}` + nextPage;
+    response["@Odata.nextLink"] = `http://localhost:${port}` + nextPage;
   }
   res.json(response);
 });
@@ -42,7 +42,7 @@ app.get('/api/data2', (req, res) => {
     // 'nextPage': `http://localhost:${port}` + nextPage,
   };
   if(nextPage){
-    response.nextPage = `http://localhost:${port}` + nextPage;
+    response['@Odata.nextLink'] = `http://localhost:${port}` + nextPage;
   }
 
   res.json(response);
